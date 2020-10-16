@@ -9,27 +9,26 @@ Route::get('/', function () {
 // Admin Routes
 Route::group(['namespace' => 'Admin'], function () {
 
-    ######################### Begin  Categoris Routes ########################
-    Route::group(['prefix' => 'categories'], function () {
-        Route::get('/','CategoriesController@index') -> name('admin.categories');
-        Route::get('create','CategoriesController@create') -> name('admin.categories.create');
-        Route::post('store','CategoriesController@store') -> name('admin.categories.store');
-        Route::get('edit/{id}','CategoriesController@edit') -> name('admin.categories.edit');
-        Route::post('update/{id}','CategoriesController@update') -> name('admin.categories.update');
-        Route::get('delete/{id}','CategoriesController@destroy') -> name('admin.categories.delete');
-    });
-    ######################### End Categoris Routes  ########################
-
    ######################### Begin products Routes ########################
         Route::group(['prefix' => 'products'], function () {
-            Route::get('/','ProductsController@index') -> name('admin.products');
-            Route::get('create','ProductsController@create') -> name('admin.products.create');
-            Route::post('store','ProductsController@store') -> name('admin.products.store');
-            Route::get('edit/{id}','ProductsController@edit') -> name('admin.products.edit');
-            Route::post('update/{id}','ProductsController@update') -> name('admin.products.update');
-            Route::get('delete/{id}','ProductsController@destroy') -> name('admin.products.delete');
-        });
+
+                Route::get('/', 'ProductController@index')->name('services');
+                Route::get('getdata', 'ProductController@getdata')->name('services.getdata');
+                Route::post('postdata', 'ProductController@postdata')->name('services.postdata');
+                // Rout Of Update
+                Route::get('fetchdata', 'ProductController@fetchdata')->name('services.fetchdata');
+                //Route Of Delete 
+                Route::get('removedata', 'ProductController@removedata')->name('services.removedata');
+
+         });
     ######################### End  products Routes  ########################
 
+                    //uploaded Media
+                    Route::get('media/{idproduct}', 'MediaProductController@index')->name('media');
+                    Route::get('media', 'MediaProductController@show')->name('media');
+                    Route::get('media/getdata/{idproduct}', 'MediaProductController@getdata')->name('media.getdata');
+                    Route::post('media/postdata', 'MediaProductController@postdata')->name('media.postdata');
+                    Route::get('media/fetchdata/{id}', 'MediaProductController@fetchdata')->name('media.fetchdata');
+                    Route::get('media/removedata/{id}', 'MediaProductController@removedata')->name('media.removedata');
 
 });

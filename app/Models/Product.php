@@ -9,23 +9,23 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'title',
-        'price',
+        'name',
+        'description',
         'image',
-        'cat_id',
+        'price',
         'created_at',
         'updated_at',
     ];
 
-    public function category()
-    {
+    public function images(){
 
-        return $this->belongsTo('App\Models\Category', 'cat_id', 'id');
+        return $this -> hasMany(\App\Models\MediaProduct::class , 'IdProduct');
     }
+
 
     public function getImageAttribute($val)
     {
-        return ($val !== null) ? asset('assets/' . $val) : "";
+        return ($val !== null) ? asset( $val) : "";
 
     }
 
